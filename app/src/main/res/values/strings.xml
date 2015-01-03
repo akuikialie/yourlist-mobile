@@ -5,7 +5,7 @@
     <string name="action_settings">Settings</string>
 
     <!-- Login Page -->
-    <string name="label_welcome_login">Welcome</string>
+    <string name="label_welcome_login">YourList!!</string>
     <string name="label_suggestion_login">Please Login!</string>
     <string name="label_field_username_login">Fill Your Username</string>
     <string name="label_field_password_login">Fill Your Password</string>
