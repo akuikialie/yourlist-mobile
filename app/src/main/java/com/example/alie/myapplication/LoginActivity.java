@@ -28,16 +28,16 @@ public class LoginActivity extends Activity {
     }
 
     public void loginAction(View view){
-        if(username.getText().toString().equals("akuikialie") &&
-            password.getText().toString().equals("admin")){
-                Toast.makeText(getApplicationContext(), "Redirecting...",
+        if(username.getText().toString().equals("") &&
+            password.getText().toString().equals("")){
+                Toast.makeText(getApplicationContext(), "Successfull!",
                 Toast.LENGTH_SHORT).show();
                 startActivity(new Intent(getApplicationContext(), MainActivity.class));
                 finish();
             }
 
         else{
-            Toast.makeText(getApplicationContext(), "Wrong Credentials",
+            Toast.makeText(getApplicationContext(), "Wrong Credential!",
                     Toast.LENGTH_SHORT).show();
         }
     }
