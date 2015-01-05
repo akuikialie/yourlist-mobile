@@ -1,45 +1,29 @@
-package com.example.alie.myapplication;
+package com.example.alie.myapplication.activity;
 
-import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.Context;
-import android.content.Intent;
-import android.os.Bundle;
+import android.content.DialogInterface;
 import android.support.v7.app.ActionBarActivity;
+import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.app.Activity;
+import android.graphics.Color;
+import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
-public class LoginActivity extends Activity {
-    private EditText  username=null;
-    private EditText  password=null;
-    private Button login;
-    Context c;
+import com.example.alie.myapplication.R;
+
+public class MainActivity extends ActionBarActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.mylogin);
-        username = (EditText)findViewById(R.id.textUsername);
-        password = (EditText)findViewById(R.id.textPassword);
-        login = (Button)findViewById(R.id.buttonSubmitLogin);
-    }
-
-    public void loginAction(View view){
-        if(username.getText().toString().equals("") &&
-            password.getText().toString().equals("")){
-                Toast.makeText(getApplicationContext(), "Successfull!",
-                Toast.LENGTH_SHORT).show();
-                startActivity(new Intent(getApplicationContext(), MainActivity.class));
-                finish();
-            }
-
-        else{
-            Toast.makeText(getApplicationContext(), "Wrong Credential!",
-                    Toast.LENGTH_SHORT).show();
-        }
+        setContentView(R.layout.home);
     }
 
     @Override
