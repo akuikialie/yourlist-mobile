@@ -51,7 +51,6 @@ public class LoginActivity extends Activity {
         username = (EditText) findViewById(R.id.textUsername);
         password = (EditText) findViewById(R.id.textPassword);
         login = (Button) findViewById(R.id.buttonSubmitLogin);
-        Log.d(msg, "The onCreate() event");
     }
 
     @TargetApi(Build.VERSION_CODES.HONEYCOMB)
@@ -93,9 +92,6 @@ public class LoginActivity extends Activity {
                 HttpClient Client = new DefaultHttpClient();
 
                 String URL = Constants.URL_SERVER+"/api/auth/login?username="+username.getText().toString()+"&password="+password.getText().toString();
-
-                Log.d(msg, "httpget : "+ URL);
-
                 try
                 {
                     String respondServer = "";
@@ -103,12 +99,14 @@ public class LoginActivity extends Activity {
                     HttpGet httpget = new HttpGet(URL);
                     ResponseHandler<String> responseHandler = new BasicResponseHandler();
                     respondServer = Client.execute(httpget, responseHandler);
-                    Log.d(msg, "Oi : " +  respondServer);
 
                     JSONObject a = new JSONObject(respondServer);
                     if(a.optInt("status", 0) == 1) {
                         isExist = true;
-                        Log.d(msg, "status : " + respondServer);
+                        Constants.User.USER_ID = a.getJSONObject("data").getString("id_user");
+                        Constants.User.USER_ID_LEVEL = a.getJSONObject("data").getInt("id_user");
+                        Constants.User.USER_NAME = a.getJSONObject("data").getString("username");
+                        Constants.User.USER_KEY = a.getJSONObject("data").getString("key");
                     }
                 }
                 catch(Exception ex)
