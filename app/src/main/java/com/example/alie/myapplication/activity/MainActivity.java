@@ -4,9 +4,12 @@ import android.annotation.TargetApi;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Build;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.app.Activity;
@@ -21,37 +24,69 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.alie.myapplication.Constants;
 import com.example.alie.myapplication.R;
+
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.ResponseHandler;
+import org.apache.http.client.methods.HttpGet;
+import org.apache.http.impl.client.BasicResponseHandler;
+import org.apache.http.impl.client.DefaultHttpClient;
+import org.json.JSONObject;
 
 import java.util.HashMap;
 import java.util.ArrayList;
 import java.util.List;
 
 public class MainActivity extends Activity {
+    String msg = "Android : ";
     ListView listView ;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.home);
 
+        try{
+            HttpClient Client = new DefaultHttpClient();
+
+            String URL = Constants.URL_SERVER+"/api/project/get_projects?key=" + Constants.User.USER_KEY;
+            Log.d(msg, "Url Get : " + URL);
+            try
+            {
+                String respondServer = "";
+
+                HttpGet httpget = new HttpGet(URL);
+                ResponseHandler<String> responseHandler = new BasicResponseHandler();
+                respondServer = Client.execute(httpget, responseHandler);
+
+                JSONObject a = new JSONObject(respondServer);
+                if(a.optInt("status", 0) == 1) {
+//                    Log.d(msg, "Data Project : " + respondServer);
+                }
+            }
+            catch(Exception ex)
+            {
+                ex.printStackTrace();
+            }
+        }
+        catch(Exception ex)
+        {
+            ex.printStackTrace();
+        }
+
         final ListView listview = (ListView) findViewById(R.id.listview);
-        String[] values = new String[] { "Android", "iPhone", "WindowsMobile",
-                "Blackberry 1", "WebOS 1", "Ubuntu 1", "Windows7 1", "Max OS X 1",
-                "Blackberry 2", "WebOS 2", "Ubuntu 2", "Windows7 2", "Max OS X 2",
-                "Blackberry 3", "WebOS 3", "Ubuntu 3", "Windows7 3", "Max OS X 3",
-                "Android", "iPhone", "WindowsMobile" };
+        String[] values = new String[] {
+                "Android",
+                "iPhone",
+                "WindowsMobile",
+        };
 
         final ArrayList<String> list = new ArrayList<String>();
         for (int i = 0; i < values.length; ++i) {
             list.add(values[i]);
         }
 
-//        LayoutInflater inflater = LayoutInflater.from(this);
-//        mTop    = inflater.inflate(R.layout.view_top, null);
-//        mBottom = inflater.inflate(R.layout.view_bottom, null);
-//
-//        listview.addHeaderView(mTop);
-//        listview.addFooterView(mBottom);
         final StableArrayAdapter adapter = new StableArrayAdapter(this, android.R.layout.simple_list_item_1, list);
         listview.setAdapter(adapter);
 
@@ -61,15 +96,7 @@ public class MainActivity extends Activity {
             @Override
             public void onItemClick(AdapterView<?> parent, final View view,
                                     int position, long id) {
-                final String item = (String) parent.getItemAtPosition(position);
-                view.animate().setDuration(2000).alpha(0).withEndAction(new Runnable() {
-                    @Override
-                    public void run() {
-                        list.remove(item);
-                        adapter.notifyDataSetChanged();
-                        view.setAlpha(1);
-                    }
-                });
+                Log.d(msg, "Click Item : " + id);
             }
 
         });
@@ -99,11 +126,12 @@ public class MainActivity extends Activity {
         }
 
     }
-//    protected void onCreate(Bundle savedInstanceState) {
-//        super.onCreate(savedInstanceState);
-//        setContentView(R.layout.home);
-//
-//    }
+
+    @TargetApi(Build.VERSION_CODES.HONEYCOMB)
+    public void creteProjectAction(View view) {
+//        startActivity(new Intent(getApplicationContext(), AddProjectActivity.class));
+        Log.d(msg, "Create project");
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
