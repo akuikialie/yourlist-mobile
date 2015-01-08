@@ -55,10 +55,10 @@ public class LoginActivity extends Activity {
 
     @TargetApi(Build.VERSION_CODES.HONEYCOMB)
     public void loginAction(View view) {
-            if (ca != null && ca.getStatus() == AsyncTask.Status.RUNNING) ca.cancel(true);
-                ca = new CallAPI();
-                ca.execute("");
-        /*if(username.getText().toString().equals("") &&
+//            if (ca != null && ca.getStatus() == AsyncTask.Status.RUNNING) ca.cancel(true);
+//                ca = new CallAPI();
+//                ca.execute("");
+        if(username.getText().toString().equals("") &&
             password.getText().toString().equals("")){
                 Toast.makeText(getApplicationContext(), "Successfull!",
                 Toast.LENGTH_SHORT).show();
@@ -69,7 +69,7 @@ public class LoginActivity extends Activity {
         else{
             Toast.makeText(getApplicationContext(), "Wrong Credential!",
                     Toast.LENGTH_SHORT).show();
-        }*/
+        }
     }
 
     CallAPI ca;
