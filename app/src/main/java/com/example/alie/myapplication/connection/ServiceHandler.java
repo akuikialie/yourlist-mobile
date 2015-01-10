@@ -30,8 +30,7 @@ public class ServiceHandler {
      * @param method - http request method
      * */
     public String makeServiceCall(String url, int method) {
-        return url;
-//        return this.makeServiceCall(url, method, null);
+        return this.makeServiceCall(url, method, null);
     }
  
     /**
