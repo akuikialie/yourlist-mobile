@@ -28,23 +28,11 @@ import org.apache.http.impl.client.DefaultHttpClient;
 import org.json.JSONObject;
 
 public class AddProjectActivity extends Activity {
-    private EditText username = null;
-    private EditText password = null;
-    private Button login;
     Context c;
-    ServiceHandler sHandler;
-    private boolean isExist;
-    private ConnectionDetector connection;
-    private InternetCheck internet;
     String msg = "Android : ";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         Log.d(msg, "Muncul tampilan create project");
-//        super.onCreate(savedInstanceState);
-//        setContentView(R.layout.mylogin);
-//        username = (EditText) findViewById(R.id.textUsername);
-//        password = (EditText) findViewById(R.id.textPassword);
-//        login = (Button) findViewById(R.id.buttonSubmitLogin);
     }
 }
