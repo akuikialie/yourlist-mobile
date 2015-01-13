@@ -32,10 +32,6 @@
             android:layout_alignEnd="@+id/textView" />
         <!--  Header Ends -->
 
-        <!-- Footer Start -->
-        <!-- Place footer next to header to set z-index property to minus value -->
-        <!-- Footer Ends -->
-
         <!-- Login Form -->
         <LinearLayout
             android:orientation="vertical"
